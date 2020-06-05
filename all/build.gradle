@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+    }
+    // 构建时候的一些依赖
+    dependencies {
+    }
+}
+plugins {
+    id 'java'
+//    // lombok使用打包时需加上这个 否则打包时候会报无法找到 getter 等一些方法
+    id("io.freefair.lombok") version "3.1.4"
+}
+
+
+version 'unspecified'
+group = 'com.hotel'
+version = '1.0'
+sourceCompatibility = 1.8
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':admin')
+    compile project(':minapp')
+    compileOnly 'org.projectlombok:lombok'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

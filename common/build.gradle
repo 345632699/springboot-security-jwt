@@ -1,0 +1,33 @@
+// 配置阿里云的源
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+    }
+    // 构建时候的一些依赖
+    dependencies {
+    }
+}
+plugins {
+    id 'java'
+    id("io.freefair.lombok") version "3.1.4"
+}
+
+jar.enabled=true
+group = 'com.hotel.common'
+version '1.0'
+apply plugin: 'java'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':model')
+    compile 'com.qiniu:qiniu-java-sdk:7.2.+'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

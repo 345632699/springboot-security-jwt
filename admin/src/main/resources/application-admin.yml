@@ -1,0 +1,55 @@
+server:
+  use-forward-headers: true
+  tomcat:
+    remote-ip-header: X-Real-IP
+    protocol-header: X-Forwarded-Proto
+app:
+  name: test
+mybatis:
+  mapper-locations:
+    #    - classpath:mapper/*.xml
+    - classpath*:mapper/*.xml
+
+# 日志配置文件
+logging:
+  config: classpath:log4j2/log4j2.xml
+
+sms:
+  appid: 1400186459
+  appkey: be622a3533fe106dfc063d0cdab7c96b
+  templateId: 383562
+
+custom:
+  config:
+    ignores:
+      # 需要过滤的 post 请求
+      post:
+        - "/api/auth/login"
+        - "/api/auth/logout"
+        - "/api/auth/resetPassword"
+      # 需要过滤的请求，不限方法
+      pattern:
+        - "/test/*"
+        - "/api/sms/*"
+        - "/api/secUser/info"
+wx:
+  miniapp:
+    configs:
+      - appid: wx092f89864f7afb50
+        secret: 008ff57480ecd30db9cb62347e6b0abe
+        token: #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+  pay:
+    #    appId: wx3a8aa895f494599a
+    #    mchId: 1508396671
+    #    mchKey: 0SzrybbPLJtfSTq2lXVfxUoQraTczPb1
+    appId: wx092f89864f7afb50
+    mchId: 1543516241
+    mchKey: LcTn9HGwvbna3ck61op5NCxzwkdz5pHa
+    subAppId: #服务商模式下的子商户公众账号ID
+    subMchId: #服务商模式下的子商户号
+    keyPath: classpath:cert/apiclient_cert.p12
+    notifyUrl: http://java.mqphp.com/wx/pay/notify/order
+    refundUrl: https://test.mist1data.com/wx/pay/notify/refund
+    tradeType: JSAPI

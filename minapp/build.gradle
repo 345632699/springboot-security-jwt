@@ -1,0 +1,78 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+    }
+    // 构建时候的一些依赖
+    dependencies {
+    }
+}
+// 编辑打包jar包时需要用到的依赖
+plugins {
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id 'java'
+//    // lombok使用打包时需加上这个 否则打包时候会报无法找到 getter 等一些方法
+    id("io.freefair.lombok") version "3.1.4"
+}
+apply plugin: 'io.spring.dependency-management'
+group = 'com.hotel.minapp'
+version = '1.0'
+sourceCompatibility = '1.8'
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':model')
+    compile project(':common')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // springboot 中使用mybatis时  不要再次添加org.mybatis 否则 会报找不到mapper方法的错误
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+    // mysql
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+    // druid 数据源的配置
+    compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.10'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+//    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.1' 不要加上这行
+
+    compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.10'
+    // 日志配置
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.1.4.RELEASE'
+
+    // https://mvnrepository.com/artifact/com.auth0/java-jwt
+    compile group: 'com.auth0', name: 'java-jwt', version: '3.8.1'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+    compile group: 'org.noggit', name: 'noggit', version: '0.5'
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+    // https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-miniapp
+    compile group: 'com.github.binarywang', name: 'weixin-java-miniapp', version: '3.4.4.B'
+
+    // 微信支付
+    compile group: 'com.github.binarywang', name: 'weixin-java-pay', version: '3.4.5.B'
+    // sms
+    compile group: 'com.github.qcloudsms', name: 'qcloudsms', version: '1.0.6'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+}

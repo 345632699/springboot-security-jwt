@@ -1,0 +1,85 @@
+server:
+  use-forward-headers: true
+  tomcat:
+    remote-ip-header: X-Real-IP
+    protocol-header: X-Forwarded-Proto
+  servlet:
+    context-path: /wx/
+app:
+  name: hotel
+mybatis:
+  mapper-locations:
+    - classpath*:mapper/*.xml
+
+# 日志配置文件
+logging:
+  config: classpath:log4j2/log4j2.xml
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  #token有效期一天
+  expiration: 86400
+  tokenHead: "Bearer "
+filePath: E://upload/wx
+fileServerUrl: http://file.mist1.com
+env: dev1
+
+dada:
+  shopNo: 11047059
+  sourceId: 73753
+  isPrepay: 1
+
+sms:
+  appid: 1400186459
+  appkey: be622a3533fe106dfc063d0cdab7c96b
+  templateId: 383562
+  notifyTemplateId: 463018
+  notifyMobile: 13760264461
+wx:
+  #  模版消息配置
+  template-msg:
+    appid: wx092f89864f7afb50
+    take_out_success: HS5BpCEGQkf-6fKjn0YeVKpEfqe_5WzmaGgNX1-sdT4
+    self_take_success: HS5BpCEGQkf-6fKjn0YeVIEfy8nc_ZIm0QkqhTcBg2g
+    remind_take: E7Oe-OBFh8ABAWudkti1MTUB7mXOOPTZoGTr5J0Um4Y
+    order_delivery: rYSNmi-tn-HS_68S2vmFrTlfbgD-MhWse3RS21GSFWs
+    evaluate_wait: kZg0wJ8cXDSQVlWBxVkNbdHSvF8_tEZRoKf0yzQCUTQ
+    order_success: sI_6FI0XZveJt5B7OYJF0WY4LoYmRtK4VT7yYwH-hXA
+  miniapp:
+    configs:
+    - appid: wx092f89864f7afb50
+      secret: 008ff57480ecd30db9cb62347e6b0abe
+      token: #微信小程序消息服务器配置的token
+      aesKey: #微信小程序消息服务器配置的EncodingAESKey
+      msgDataFormat: JSON
+    - appid: wxe905b8a32418ae69
+      secret: 27edf756d52bdc8d6089a1831be612b5
+      token: #微信小程序消息服务器配置的token
+      aesKey: #微信小程序消息服务器配置的EncodingAESKey
+      msgDataFormat: JSON
+  pay:
+#    appId: wx3a8aa895f494599a
+#    mchId: 1508396671
+#    mchKey: 0SzrybbPLJtfSTq2lXVfxUoQraTczPb1
+    appId: wx092f89864f7afb50
+    mchId: 1543516241
+    mchKey: LcTn9HGwvbna3ck61op5NCxzwkdz5pHa
+    subAppId: #服务商模式下的子商户公众账号ID
+    subMchId: #服务商模式下的子商户号
+    keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头
+    notifyUrl: http://java.mqphp.com/wx/pay/notify/order
+    tradeType: JSAPI
+check:
+  month: 3
+
+
+cancelWaitTime: 15
